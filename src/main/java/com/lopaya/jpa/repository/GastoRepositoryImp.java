@@ -1,8 +1,10 @@
 package com.lopaya.jpa.repository;
 
+import com.lopaya.domain.Gasto;
 import com.lopaya.domain.repository.GastoRepository;
 import com.lopaya.jpa.entity.CategoriaEntity;
 import com.lopaya.jpa.entity.GastoEntity;
+import com.lopaya.jpa.mapper.GastoMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -15,54 +17,58 @@ public class GastoRepositoryImp implements GastoRepository {
     @PersistenceContext
     private EntityManager em;
 
+    private final GastoMapper gastoMapper;
+
+    public GastoRepositoryImp(GastoMapper gastoMapper){
+        this.gastoMapper = gastoMapper;
+    }
+
     @Override
-    public List<GastoEntity> all() {
-        List<GastoEntity> listaGastos = em.createQuery("SELECT e FROM GastoEntity", GastoEntity.class)
+    public List<Gasto> all() {
+        List<GastoEntity> listaGastosEntity = em.createQuery("SELECT e FROM GastoEntity e", GastoEntity.class)
             .getResultList();
 
-        if(listaGastos.isEmpty()){
-            return null;
-        }
+        List<Gasto> listaGastos = listaGastosEntity.stream().map(gastoMapper::toDomain).toList();
 
         return listaGastos;
     }
 
     @Override
-    public List<GastoEntity> findByCategoriaEntity(CategoriaEntity categoriaEntity) {
-        List<GastoEntity> listaGastos = em.createQuery("SELECT e FROM GastoEntity e WHERE e.categoriaEntity = : categoriaEntity", GastoEntity.class)
+    public List<Gasto> findByCategoriaEntity(CategoriaEntity categoriaEntity) {
+        List<GastoEntity> listaGastosEntity = em.createQuery("SELECT e FROM GastoEntity e WHERE e.categoriaEntity = : categoriaEntity", GastoEntity.class)
                 .setParameter("categoriaEntity", categoriaEntity)
                 .getResultList();
 
-        if(listaGastos.isEmpty()){
-            return null;
-        }
+        List<Gasto> listaGastos = listaGastosEntity.stream().map(gastoMapper::toDomain).toList();
 
         return listaGastos;
     }
 
     @Override
-    public GastoEntity findById(Integer gastoId) {
-        GastoEntity gasto = em.createQuery("SELECT e FROM GastoEntity e WHERE e.id = :gastoId", GastoEntity.class)
-                .setParameter("gastoId", gastoId)
-                .getSingleResult();
+    public Gasto findById(Integer gastoId) {
+        //Para buscar por clave primario no hace falta crear la query,
+        // JPA tiene em.find que devuelve el null si no existe.
+        GastoEntity gastoEntity = em.find(GastoEntity.class, gastoId);
+
+        Gasto gasto = gastoMapper.toDomain(gastoEntity);
 
         return gasto;
     }
 
     @Override
-    public GastoEntity save(GastoEntity gastoEntity) {
+    public Gasto save(GastoEntity gastoEntity) {
         if(gastoEntity.getId() == null){
             em.persist(gastoEntity);
-            return gastoEntity;
+            return gastoMapper.toDomain(gastoEntity);
         }else{
-            return em.merge(gastoEntity);
+            return gastoMapper.toDomain(em.merge(gastoEntity));
         }
     }
 
     @Override
-    public GastoEntity deleteById(GastoEntity gastoEntity) {
+    public Gasto deleteById(GastoEntity gastoEntity) {
 //        GastoEntity gastoDeleted = gastoEntity;
         em.remove(gastoEntity);
-        return gastoEntity;
+        return gastoMapper.toDomain(gastoEntity);
     }
 }

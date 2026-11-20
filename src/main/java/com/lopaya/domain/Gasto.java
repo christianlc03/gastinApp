@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,7 +16,7 @@ public class Gasto {
     private Integer id;
     private String titulo;
     private Integer categoriaId;
-    private Double cantidadImporte;
+    private BigDecimal cantidadImporte;
     private String establecimiento;
     private String ubicacionNombre;
     private Double latitud;
@@ -29,7 +30,7 @@ public class Gasto {
     public Gasto(){};
 
     //Constructor para registrar un gasto con datos basicos
-    public Gasto(Integer id, String titulo, Integer categoriaId, Double cantidadImporte, String establecimiento, String ubicacionNombre, LocalDate fecha, LocalTime hora, String metodoPago, LocalDateTime creadoEn) {
+    public Gasto(Integer id, String titulo, Integer categoriaId, BigDecimal cantidadImporte, String establecimiento, String ubicacionNombre, LocalDate fecha, LocalTime hora, String metodoPago, LocalDateTime creadoEn) {
         this.id = id;
         this.titulo = titulo;
         this.categoriaId = categoriaId;
@@ -43,7 +44,7 @@ public class Gasto {
     }
 
     //Constructor completo
-    public Gasto(Integer id, String titulo, Integer categoriaId, Double cantidadImporte, String establecimiento, String ubicacionNombre, Double latitud, Double longitud, LocalDate fecha, LocalTime hora, String metodoPago, String descripcion, LocalDateTime creadoEn) {
+    public Gasto(Integer id, String titulo, Integer categoriaId, BigDecimal cantidadImporte, String establecimiento, String ubicacionNombre, Double latitud, Double longitud, LocalDate fecha, LocalTime hora, String metodoPago, String descripcion, LocalDateTime creadoEn) {
         this.id = id;
         this.titulo = titulo;
         this.categoriaId = categoriaId;
@@ -83,11 +84,11 @@ public class Gasto {
         this.categoriaId = categoriaId;
     }
 
-    public Double getCantidadImporte() {
+    public BigDecimal getCantidadImporte() {
         return cantidadImporte;
     }
 
-    public void setCantidadImporte(Double cantidadImporte) {
+    public void setCantidadImporte(BigDecimal cantidadImporte) {
         this.cantidadImporte = cantidadImporte;
     }
 

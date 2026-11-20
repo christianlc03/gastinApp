@@ -9,6 +9,4 @@ public interface GastoService {
     List<Gasto> listarGastosPorCategoria(Integer categoriaId);
     Gasto buscarPorId(Integer id);
     Gasto guardar(Gasto gasto);
-
-
 }

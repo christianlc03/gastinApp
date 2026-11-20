@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface GastoRepository extends Repository<GastoEntity, Integer> {
 
-    List<GastoEntity> all();
+    List<Gasto> all();
     
-    List<GastoEntity> findByCategoriaEntity(CategoriaEntity categoriaEntity);
+    List<Gasto> findByCategoriaEntity(CategoriaEntity categoriaEntity);
 
-    GastoEntity findById(Integer gastoId);
+    Gasto findById(Integer gastoId);
 
-    GastoEntity save(GastoEntity gastoEntity);
+    Gasto save(GastoEntity gastoEntity);
 
-    GastoEntity deleteById(GastoEntity gastoEntity);
+    Gasto deleteById(GastoEntity gastoEntity);
 }
