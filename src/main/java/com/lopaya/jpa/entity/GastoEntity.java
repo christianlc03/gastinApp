@@ -94,4 +94,23 @@ public class GastoEntity{
     public GastoEntity() {
 
     }
+
+    @Override
+    public String toString() {
+        return "GastoEntity{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", categoriaEntity=" + categoriaEntity +
+                ", cantidadImporte=" + cantidadImporte +
+                ", establecimiento='" + establecimiento + '\'' +
+                ", ubicacionNombre='" + ubicacionNombre + '\'' +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", fecha=" + fecha +
+                ", hora=" + hora +
+                ", metodoPago='" + metodoPago + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", creadoEn=" + creadoEn +
+                '}';
+    }
 }

@@ -5,11 +5,10 @@ import com.lopaya.domain.Gasto;
 import java.util.List;
 
 public interface GastoService {
-    Gasto cargarGasto(Integer gastoId);
-
-    List<Gasto> cargarGastos();
-
-
+    List<Gasto> listarTodos();
+    List<Gasto> listarGastosPorCategoria(Integer categoriaId);
+    Gasto buscarPorId(Integer id);
+    Gasto guardar(Gasto gasto);
 
 
 }

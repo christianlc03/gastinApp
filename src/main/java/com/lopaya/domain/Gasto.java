@@ -26,6 +26,8 @@ public class Gasto {
     private String descripcion;
     private LocalDateTime creadoEn;
 
+    public Gasto(){};
+
     //Constructor para registrar un gasto con datos basicos
     public Gasto(Integer id, String titulo, Integer categoriaId, Double cantidadImporte, String establecimiento, String ubicacionNombre, LocalDate fecha, LocalTime hora, String metodoPago, LocalDateTime creadoEn) {
         this.id = id;

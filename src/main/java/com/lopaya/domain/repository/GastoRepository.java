@@ -13,9 +13,9 @@ public interface GastoRepository extends Repository<GastoEntity, Integer> {
     
     List<GastoEntity> findByCategoriaEntity(CategoriaEntity categoriaEntity);
 
-    GastoRepository findById(Integer gastoId);
+    GastoEntity findById(Integer gastoId);
 
     GastoEntity save(GastoEntity gastoEntity);
 
-    GastoEntity deleteById(Integer id);
+    GastoEntity deleteById(GastoEntity gastoEntity);
 }
